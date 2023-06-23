@@ -1,27 +1,59 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
+import { useUserAuth } from '../context/UserAuthContext';
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { logIn, googleSignIn } = useUserAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await logIn(email, password);
+      setEmail("");
+      setPassword("");
+      navigate('/home');
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try{
+      await googleSignIn();
+      navigate("/home");
+    }catch(err){
+      console.log(err.message);
+    }
+  }
+
   return (
     <div>
-      <div style={{display:'flex', flexDirection:'column', gap:"20px"}}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: "20px" }}>
         <h1>Login Here!</h1>
-        <input type='email' placeholder='Enter Email' />
-        <input type='email' placeholder='Enter Password'/>
-        <button type="submit">Log In</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <input type='email' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} />
+        <input type='password' placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Login</button>
         <GoogleButton
-            style={{textAlign:'center', width:"reset", height:"reset"}}
-            type="dark"
-            onClick={() => console.log("hi")}
+          onClick={handleGoogleSignIn}
+          style={{ textAlign: 'center', width: "reset", height: "reset" }}
+          type="dark"
         />
         <h3>Don't have an account? <span>
           <Link to="/signup">
-              Sign Up
+            Sign Up
           </Link>
-          </span> here</h3>
-      </div>
+        </span> here</h3>
+      </form>
     </div>
   )
 }

@@ -49,6 +49,10 @@ span{
   cursor: pointer;
 }
 
+.email{
+  color: #646cffaa;
+}
+
 @media screen and (width < 600px) {
   input{
     width: 300px;

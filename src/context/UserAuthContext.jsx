@@ -3,15 +3,18 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged 
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "firebase/auth";
-import { auth } from "firebase/auth";
+
+import { auth } from "../firebase.js";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
 
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState({});
 
     function signUp(email, password){
         return createUserWithEmailAndPassword(auth, email, password);
@@ -19,6 +22,15 @@ export function UserAuthContextProvider({ children }) {
 
     function logIn(email, password){
         return signInWithEmailAndPassword(auth, email, password);
+    }
+
+    function logOut(){
+        return signOut(auth);
+    }
+
+    function googleSignIn(){
+        const googleAuthProvider = new GoogleAuthProvider();
+        return signInWithPopup(auth, googleAuthProvider)
     }
 
     useEffect(() => {
@@ -32,7 +44,9 @@ export function UserAuthContextProvider({ children }) {
     }, []);
 
     return (
-        <userAuthContext.Provider>
+        <userAuthContext.Provider
+            value={{user, signUp, logIn, logOut, googleSignIn}}
+        >
             { children }
         </userAuthContext.Provider>
     )
