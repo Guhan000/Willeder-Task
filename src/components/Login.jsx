@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../App.css'
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
@@ -27,10 +27,10 @@ const Login = () => {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await googleSignIn();
       navigate("/home");
-    }catch(err){
+    } catch (err) {
       console.log(err.message);
     }
   }
@@ -48,11 +48,16 @@ const Login = () => {
           style={{ textAlign: 'center', width: "reset", height: "reset" }}
           type="dark"
         />
-        <h3>Don't have an account? <span>
-          <Link to="/signup">
-            Sign Up
-          </Link>
-        </span> here</h3>
+        <div>
+          <h3>Don't have an account? <span>
+            <Link to="/signup">
+              Sign Up
+            </Link>
+          </span> here</h3>
+          <h3>
+            <Link to="/forget-password">Forget Password?</Link>
+          </h3>
+        </div>
       </form>
     </div>
   )

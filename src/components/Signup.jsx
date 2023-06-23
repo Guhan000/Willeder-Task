@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../context/UserAuthContext';
+import { auth } from '../firebase';
 
 const Signup = () => {
 
@@ -15,9 +16,8 @@ const Signup = () => {
     setError("");
     try {
       await signUp(email, password);
-      setEmail("");
-      setPassword("");
-      navigate('/');
+      // auth = null;
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     }
