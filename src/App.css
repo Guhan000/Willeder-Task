@@ -53,6 +53,20 @@ span{
   color: #646cffaa;
 }
 
+.list{
+  display: flex;
+  flex-direction: column;
+}
+
+.listItems{
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  border: 1px solid #646cffaa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 @media screen and (width < 600px) {
   input{
     width: 300px;

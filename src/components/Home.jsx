@@ -1,5 +1,6 @@
 import React from 'react'
 import { useUserAuth } from '../context/UserAuthContext'
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -17,6 +18,7 @@ const Home = () => {
     <div>
       <p>Welcome <i className='email'>{user.email}</i></p>
       <button onClick={handleLogout}>Logout</button>
+      <Link to="/home/data"><button>LazyLoad</button></Link>
     </div>
   )
 }

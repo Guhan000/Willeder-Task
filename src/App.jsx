@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { UserAuthContextProvider } from './context/UserAuthContext'
 import ForgetPassword from './components/ForgetPassword';
 import ResetPassword from './components/ResetPassword';
+import LazyLoading from './components/LazyLoading';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path='/forget-password' element={<ForgetPassword />}></Route>
           <Route path='reset-password' element={<ResetPassword />}></Route>
+          <Route path='/home/data' element={<LazyLoading />}></Route>
         </Routes>
       </UserAuthContextProvider>
     </BrowserRouter>
