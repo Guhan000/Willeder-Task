@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function LazyLoading() {
   const [passengers, setPassengers] = useState([]);
@@ -15,15 +15,15 @@ function LazyLoading() {
     const url = `https://api.instantwebtools.net/v1/passenger?page=${currentPage}&size=10`;
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setPassengers(prevPassengers => [...prevPassengers, ...data.data]);
-        setCurrentPage(prevPage => prevPage + 1);
+      .then((response) => response.json())
+      .then((data) => {
+        setPassengers((prevPassengers) => [...prevPassengers, ...data.data]);
+        setCurrentPage((prevPage) => prevPage + 1);
         setIsLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsLoading(false);
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }
 
@@ -35,9 +35,12 @@ function LazyLoading() {
   }
 
   return (
-    <div onScroll={handleScroll} style={{ height: '500px', overflowY: 'scroll'}}>
+    <div
+      onScroll={handleScroll}
+      style={{ height: "500px", overflowY: "scroll" }}
+    >
       <ul>
-        {passengers.map(passenger => (
+        {passengers.map((passenger) => (
           <li key={passenger._id}>{passenger.name}</li>
         ))}
       </ul>

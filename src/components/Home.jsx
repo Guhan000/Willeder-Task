@@ -1,26 +1,28 @@
-import React from 'react'
-import { useUserAuth } from '../context/UserAuthContext'
-import { Link } from 'react-router-dom';
+import { useUserAuth } from "../context/UserAuthContext";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-
   const { user, logOut } = useUserAuth();
 
   const handleLogout = async () => {
-    try{
+    try {
       await logOut();
-    }catch(err){
+    } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
   return (
     <div>
-      <p>Welcome <i className='email'>{user.email}</i></p>
+      <p>
+        Welcome <i className="email">{user.email}</i>
+      </p>
       <button onClick={handleLogout}>Logout</button>
-      <Link to="/home/data"><button>LazyLoad</button></Link>
+      <Link to="/home/data">
+        <button>LazyLoad</button>
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
