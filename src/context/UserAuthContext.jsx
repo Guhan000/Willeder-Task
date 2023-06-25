@@ -36,7 +36,7 @@ export function UserAuthContextProvider({ children }) {
 
   function forgetPassword(email) {
     return sendPasswordResetEmail(auth, email, {
-      url: "https://willeder-task.netlify.app",
+      url: "https://willeder-task.netlify.app/",
     });
   }
 
